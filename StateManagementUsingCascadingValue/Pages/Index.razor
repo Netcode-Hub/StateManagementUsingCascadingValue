@@ -1,0 +1,44 @@
+﻿@page "/"
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-header">Product Count: @ProductService.ProductCount </div>
+            <div class="card-body" style="max-height:50vh; overflow-y:scroll;">
+                @if (ProductService.ProductCount > 0)
+                {
+                    foreach (var item in ProductService.Products)
+                    {
+                        <div class="col-auto m-2">
+                            <div class="card">
+                                <div class="card-header">@item.Name</div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        
+    </div>
+    <div class="row col-auto card mt-5">
+        <div class="form-group">
+            <label class="form-label"> Name</label>
+            <InputText @bind-Value="Product.Name"></InputText>
+            <button class="mt-2 btn btn-primary" @onclick="AddProduct">Add Product</button>
+        </div>
+    </div>
+     
+</div>
+@code {
+    [CascadingParameter]
+    public ProductService ProductService { get; set; }
+
+    public Product Product { get; set; } = new();
+
+    private void AddProduct()
+    {
+        Product.Id = ProductService.ProductCount++;
+        ProductService.Products.Add(Product);
+        Product = new();
+    }
+}
+

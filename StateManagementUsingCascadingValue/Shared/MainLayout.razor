@@ -1,0 +1,25 @@
+﻿@inherits LayoutComponentBase
+
+<PageTitle>StateManagementUsingCascadingValue</PageTitle>
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">State Management Using Cascading Value</a>
+        </div>
+
+        <article class="content px-4">
+            <CascadingValue Value="ProductService">
+                @Body
+            </CascadingValue>
+        </article>
+    </main>
+</div> 
+
+@code {
+    ProductService ProductService { get; set; } = new ProductService();
+}
